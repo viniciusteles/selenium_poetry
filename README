@@ -1,8 +1,7 @@
 SeleniumPoetry
 ==============
 
-Introduction goes here.
-
+Selenium Poetry is a DSL created to separate the test intention from the HTML selectors. HTML selector are placed in separate YAML files, while the test uses identifiers (phrases) to refer to the selectors in the YAML files.
 
 Dependencies
 ============
@@ -13,7 +12,7 @@ Dependencies
 Example
 =======
 
-Example goes here.
+Examples are being written and will be available shortly. (May 21 2008)
 
 
-Copyright (c) 2008 [name of plugin creator], released under the MIT license
+Copyright (c) 2008 Vinícius Manhães Teles, Improve It, released under the MIT license
