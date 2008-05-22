@@ -31,6 +31,7 @@ h1 {
 
 a {
     color:                  #663399;
+	margin-left:			34.35em;
 }
 
 label {
@@ -40,9 +41,17 @@ label {
 	margin-top:				.2em;
 }
 
-input, textarea {
+input {
 	display:				block;
-	width:					40%;
+	width:					20em;
 	border:					1px inset #7F6B43;
 }
 
+fieldset {
+	border:					none;
+}
+
+.submit {
+	padding:				.2em .75em;
+	width:					auto;
+}
