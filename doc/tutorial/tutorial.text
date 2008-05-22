@@ -23,10 +23,26 @@ The tests are located in the directories:
 
 ### Testing the homepage
 
-Let's begin with the tests for the homepage. Take a look at the file:
+Let's begin with the tests for the homepage. Look at the file:
 
     doc/tutorial/test/selenium_poetry/index.rsel
 
+Take a moment and try to read it all. As you go, try to figure out what the purpose of the test is. 
+
+Are you done? Then, let's move on. Open the file:
+
+    doc/tutorial/test/selenium_regular/index.rsel
+    
+This file tests the very same things as the previous one. But, boy, what a difference! Isn't that much more confusing and polluted?
+
+The source of the problem is the use of XPath selectors in the same file where we place the test actions. To understand that, let's forget about Selenium mechanics for a moment. Say we're just writing a test script on a piece of paper. We'd probably write things like these:
+
+* Check if there's a heading with the content: Postcard Gallery
+* Check if there's a postcard of Rio de Janeiro
+* Check if there's a postcard of Recife
+* Check if there are four postcards
+
+This is straightforward and easy to communicate to anyone else, except the computer. It demands more precision from ourselves. It wants to know what part of the HTML are we referring to. That's why we must use XPath selectors, or any kind of selector that Selenium would allow.
 
 
 
