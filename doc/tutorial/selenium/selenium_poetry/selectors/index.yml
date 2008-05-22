@@ -1,0 +1,35 @@
+page heading:
+    //h1
+    
+rio de janeiro:
+    //ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]
+    
+recife:
+    //ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]
+    
+norway:
+    //ul/li/img[@src="images/norway.jpg" and @alt="Norway" and @title="Norway"]
+    
+littleboy:
+    //ul/li/img[@src="images/littleboy.jpg" and @alt="Littleboy" and @title="Littleboy"]
+    
+selection area:
+    //div[@id="selection"]
+    
+postcards area:
+    //div[@id="postcards"]
+    
+buy button:
+    //a[@href="checkout.html" and text()="Buy"]
+    
+number of postcards:    
+    this.page().findElement('postcards').select('img').length;
+
+number of postcards selected:    
+    this.page().findElement('selection').select('img').length;
+    
+empty selection area:
+    this.page().findElement('selection').select('img').length == 0;
+
+less postcards after drag:
+    this.page().findElement('selection').select('img').length < numberOfPostarcdsAvaliable;

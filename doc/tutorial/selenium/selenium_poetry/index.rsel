@@ -1,0 +1,30 @@
+load_selectors :index
+
+should_have_text "page heading", "Postcard Gallery"
+
+should_have      "rio de janeiro",
+                 "recife",
+                 "norway",
+                 "littleboy",
+                 "selection area",
+                 "postcards area",
+                 "buy button"
+                 
+should_equal     "number of postcards" => 4
+                 
+should_be        "empty selection area"  
+
+should_drag_and_drop "rio de janeiro", "selection"
+
+should_wait_for_equal "number of postcards" => 3,
+                      "number of postcards selected" => 1
+
+should_not_be     "empty selection area"
+
+should_store      "number of postcards" => "numberOfPostarcdsAvaliable"
+
+should_drag_and_drop "recife", "selection"
+
+should_be         "less postcards after drag"
+
+click_and_wait    "buy button"

@@ -1,0 +1,19 @@
+# Tutorial 
+
+## Introduction
+
+In this tutorial we will assume the development of a tiny application. Say there's an artist who designs very fancy postcards. He sells them using the web. 
+
+The application has only two pages. The users access an index page where they can find all the postcards. They can drag the ones they like and drop them in a selection area. Then, they click on 'Buy' and are forwarded to a form where they place contact information the artist can use to get in touch with the buyer. So, it isn't a completely automated sales process. But, it's enough for the purposes of this tutorial.
+
+## The homepage
+
+<<Ilustration>>
+
+
+
+Norway - Ken Douglas
+Rio de Janeiro - Daniël Silveira  
+Recife - Antonio Serra
+LittleBoy - Marcus Correa
+  

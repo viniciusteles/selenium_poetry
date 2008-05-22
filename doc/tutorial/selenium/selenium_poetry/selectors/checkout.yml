@@ -1,0 +1,29 @@
+form:
+    //form[@action="finish.html" and @method="post" and @accept-charset="utf-8"]
+
+label for name:
+    //form/fieldset/label[@for="name" and text()="Name:"]
+    
+input for name:
+    //form/fieldset/input[@name="name" and @type="text"]
+
+label for email:
+    //form/fieldset/label[@for="email" and text()="Mail:"]
+    
+input for email:
+    //form/fieldset/input[@name="email" and @type="text"]
+
+label for address:
+    //form/fieldset/label[@for="address" and text()="Address:"]
+
+input for address:
+    //form/fieldset/input[@name="address" and @type="text"]
+    
+label for phone:
+    //form/fieldset/label[@for="phone" and text()="Phone:"]
+    
+input for phone:
+    //form/fieldset/input[@name="phone" and @type="text"]
+    
+submit:
+    //form/fieldset/input[@type="submit"]

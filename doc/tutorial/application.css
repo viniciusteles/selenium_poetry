@@ -1,0 +1,48 @@
+html * {
+    list-style-type:        none;
+    font:                   normal normal normal 1em/1em Geneva, Helvetica, "Lucida Grande", "Trebuchet MS", Arial, sans-serif;
+}
+
+#selection {
+   	width:					20.25em;
+	min-height:				13em;
+	height:					auto !important;
+	height:					13em;
+	border:					1px solid black;
+	margin-top:				.75em;
+	margin-left:			34.35em;
+	position:				relative;
+}
+
+#postcards {
+	float:					left;
+	width:					31em;
+	margin-top:				.5em;
+}
+
+li {
+	display:				inline;
+}
+
+h1 {
+    color:                  #663399;
+    font-size:              200%;
+}
+
+a {
+    color:                  #663399;
+}
+
+label {
+	float:					left;
+	clear:					left;
+	width:					7em;
+	margin-top:				.2em;
+}
+
+input, textarea {
+	display:				block;
+	width:					40%;
+	border:					1px inset #7F6B43;
+}
+
