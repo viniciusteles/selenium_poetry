@@ -1,30 +1,28 @@
-load_selectors :index
+assert_text             "//h1", "Postcard Gallery"
 
-should_have_text "page heading", "Postcard Gallery"
+assert_element_present '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]'
+assert_element_present '//ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]'
+assert_element_present '//ul/li/img[@src="images/norway.jpg" and @alt="Norway" and @title="Norway"]'
+assert_element_present '//ul/li/img[@src="images/littleboy.jpg" and @alt="Littleboy" and @title="Littleboy"]'
+assert_element_present '//div[@id="selection"]'
+assert_element_present '//div[@id="postcards"]'
+assert_element_present 'buy button'
 
-should_have      "rio de janeiro",
-                 "recife",
-                 "norway",
-                 "littleboy",
-                 "selection area",
-                 "postcards area",
-                 "buy button"
+assert_eval             "this.page().findElement('postcards').select('img').length;", 4
+assert_eval             "this.page().findElement('selection').select('img').length == 0;", true                 
+
+drag_and_drop_to_object '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]', '//div[@id="selection"]'
                  
-should_equal     "number of postcards" => 4
-                 
-should_be        "empty selection area"  
+wait_for_eval           'this.page().findElement('postcards').select('img').length;', 3
+wait_for_eval           'this.page().findElement('selection').select('img').length;', 1 
 
-should_drag_and_drop "rio de janeiro", "selection"
+assert_eval             "this.page().findElement('selection').select('img').length == 0;", false
 
-should_wait_for_equal "number of postcards" => 3,
-                      "number of postcards selected" => 1
+store_eval              "this.page().findElement('postcards').select('img').length;", "numberOfPostarcdsAvaliable"
 
-should_not_be     "empty selection area"
+drag_and_drop_to_object '//ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]', '//div[@id="selection"]'
 
-should_store      "number of postcards" => "numberOfPostarcdsAvaliable"
+assertEval              "this.page().findElement('selection').select('img').length < numberOfPostarcdsAvaliable;", true
 
-should_drag_and_drop "recife", "selection"
+click_and_wait          '//a[@href="checkout.html" and text()="Buy"]'
 
-should_be         "less postcards after drag"
-
-click_and_wait    "buy button"

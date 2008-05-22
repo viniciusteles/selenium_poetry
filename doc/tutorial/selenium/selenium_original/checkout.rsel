@@ -1,26 +1,21 @@
-load_selectors :checkout, :finish
-
-should_have           "form",
-                      "label for name",
-                      "input for name",
-                      "label for email",
-                      "input for email",
-                      "label for address",
-                      "input for address",
-                      "label for phone",
-                      "input for phone",
-                      "submit"
-                      
-type_on               "input for name" => "Steve Jobs",
-                      "input for email" => "rdf@apple.com",
-                      "input for address" => "1 Infinite Loop, Cupertino, CA",
-                      "input for phone"   => "1-800-MY-APPLE"
-                      
-
-click_on              "submit"
-
-should_wait_for       "thank you"
-
-should_wait_for_absence_of "form"
-                      
-                      
+assert_element_present       '//form[@action="finish.html" and @method="post" and @accept-charset="utf-8"]'
+assert_element_present       '//form/fieldset/label[@for="name" and text()="Name:"]'
+assert_element_present       '//form/fieldset/input[@name="name" and @type="text"]'
+assert_element_present       '//form/fieldset/label[@for="email" and text()="Mail:"]'
+assert_element_present       '//form/fieldset/input[@name="email" and @type="text"]'
+assert_element_present       '//form/fieldset/label[@for="address" and text()="Address:"]'
+assert_element_present       '//form/fieldset/input[@name="address" and @type="text"]'
+assert_element_present       '//form/fieldset/label[@for="phone" and text()="Phone:"]'
+assert_element_present       '//form/fieldset/input[@name="phone" and @type="text"]'
+assert_element_present       '//form/fieldset/input[@type="submit"]'
+                           
+type                         '//form/fieldset/input[@name="name" and @type="text"]',    'Steve Jobs'
+type                         '//form/fieldset/input[@name="email" and @type="text"]',   'rdf@apple.com'
+type                         '//form/fieldset/input[@name="address" and @type="text"]', '1 Infinite Loop, Cupertino, CA'
+type                         '//form/fieldset/input[@name="phone" and @type="text"]',   '1-800-MY-APPLE'
+                           
+click                        '//form/fieldset/input[@type="submit"]'
+                        
+wait_for_element_present     '//h1[text()="Thank You!"]'                      
+                        
+wait_for_element_not_present '//form[@action="finish.html" and @method="post" and @accept-charset="utf-8"]'

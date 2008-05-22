@@ -1,26 +1,26 @@
-load_selectors :checkout, :finish
+load_selectors              :checkout, :finish
+                       
+should_have                 "form",
+                            "label for name",
+                            "input for name",
+                            "label for email",
+                            "input for email",
+                            "label for address",
+                            "input for address",
+                            "label for phone",
+                            "input for phone",
+                            "submit"
+                          
+type_on                     "input for name" => "Steve Jobs",
+                            "input for email" => "rdf@apple.com",
+                            "input for address" => "1 Infinite Loop, Cupertino, CA",
+                            "input for phone"   => "1-800-MY-APPLE"
+                          
+                          
+click_on                    "submit"
+                          
+should_wait_for             "thank you"
 
-should_have           "form",
-                      "label for name",
-                      "input for name",
-                      "label for email",
-                      "input for email",
-                      "label for address",
-                      "input for address",
-                      "label for phone",
-                      "input for phone",
-                      "submit"
-                      
-type_on               "input for name" => "Steve Jobs",
-                      "input for email" => "rdf@apple.com",
-                      "input for address" => "1 Infinite Loop, Cupertino, CA",
-                      "input for phone"   => "1-800-MY-APPLE"
-                      
-
-click_on              "submit"
-
-should_wait_for       "thank you"
-
-should_wait_for_absence_of "form"
+should_wait_for_absence_of  "form"
                       
                       
