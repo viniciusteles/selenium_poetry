@@ -1,4 +1,4 @@
-assert_text             "//h1", "Postcard Gallery"
+assert_text            "//h1", "Postcard Gallery"
 
 assert_element_present '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]'
 assert_element_present '//ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]'

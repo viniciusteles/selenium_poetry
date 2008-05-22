@@ -44,10 +44,40 @@ The source of the problem is the use of XPath selectors in the same file where w
 
 This is straightforward and easy to communicate to anyone else, except the computer. It demands more precision from ourselves. It wants to know what part of the HTML are we referring to. That's why we must use XPath selectors, or any kind of selector that Selenium would allow.
 
+We solved this problem separating concerns. We decided to place test purposes in one place and selectors in another. Take a look at the file:
+
+    doc/tutorial/test/selenium_poetry/selectors/index.yml
+    
+This file contains only selectors. Actually that's not completely true. There are selectors and keys. It's like a Ruby Hash. There's a *key* and *value*. In this case, the *key* is a phrase that describes the selector, while the *value* is the selector itself. Let's see an example. In the selector's file, you might find something like this:
+
+    postcard of rio de janeiro:
+        //ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]
+
+When Selenium Poetry loads this file, it creates a Ruby Hash like the one below:
+
+    { 'postcard of rio de janeiro' => '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]' }
+
+From then on, you don't need to think about the HTML selector anymore. You just use the keys ('postcard of rio de janeiro', in the last case). 
+
+This separation of concerns not only helps you to write more readable tests, but also creates opportunities for reuse. You can use the same key in several test cases. If the corresponding selector changes, you just have to change in one place, so it's also much DRYer.
+
+In order to use the keys in your Selenium tests, all you have to do is to load them in the beginning of the test. That's how you do it:
+
+    load_selectors        :index
+    
+This will load the keys in the file **index.yml**, which must be placed in the directory **test/selectors** of your Rails application. If you need to load keys from several selector files, you just do like this:
+
+    load_selectors        :checkout, :finish
+    
+The keys placed in the files **checkout.yml** and **finish.yml** will be loaded. You can spread your keys in as many files as you want.
 
 
-Norway - Ken Douglas
-Rio de Janeiro - Daniël Silveira  
-Recife - Antonio Serra
+----
+Authors: Vinícius Teles and Marcos Tapajós
+
+Pictures from Flickr (Creative Commons):  
+Norway - Ken Douglas  
+Rio de Janeiro - Daniël Silveira   
+Recife - Antonio Serra  
 LittleBoy - Marcus Correa
   

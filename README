@@ -7,12 +7,16 @@ Dependencies
 ============
 
 * Selenium on Rails
-* Mocha
+* Mocha (to run plugin tests)
 
-Example
-=======
+Tutorial
+========
 
-Examples are being written and will be available shortly. (May 21 2008)
+Read the tutorial in doc/tutorial/index.text
 
+Release Notes
+=============
 
-Copyright (c) 2008 Vinícius Manhães Teles, Improve It, released under the MIT license
+Selenium Plugin hasn't been officially published yet. The plugin is working fine, but we're still working on the documentation. A tutorial has just  been published, but we plan to improve it. (22 May 2008)
+
+Copyright (c) 2008 Vinícius Manhães Teles and Marcos Tapajós, Improve It, released under the MIT license
