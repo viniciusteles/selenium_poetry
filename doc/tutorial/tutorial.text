@@ -2,13 +2,31 @@
 
 ## Introduction
 
-In this tutorial we will assume the development of a tiny application. Say there's an artist who designs very fancy postcards. He sells them using the web. 
+In this tutorial we will assume the development of a tiny application: **The Postcard Galley**. 
 
-The application has only two pages. The users access an index page where they can find all the postcards. They can drag the ones they like and drop them in a selection area. Then, they click on 'Buy' and are forwarded to a form where they place contact information the artist can use to get in touch with the buyer. So, it isn't a completely automated sales process. But, it's enough for the purposes of this tutorial.
+There's this artist who designs very fancy postcards. He sells them using his web site. To see it load the following file in your web browser: 
 
-## The homepage
+    doc/tutorial/app/index.html 
 
-<<Ilustration>>
+The application has only three pages. The postcards are located in the very homepage. A visitor interested in buying a few of them can drag them to the selection area on the right. Clicking on 'Buy' the visitor is presented with a form where he should provide contact info. Finally, after submitting the form, the visitor will see a thank-you-page.
+
+It isn't a completely automated sales process. But, it's enough for the purposes of this tutorial. Oh, it's not completely functional either, but you'll get the picture.
+
+## Tests
+
+There are two sets of tests for this application. One of them uses Selenium Poetry while the other uses just regular Selenium commands. Both sets test the same aspects of the application, but you'll see that there's a dramatic improvement in test readability when Selenium Poetry is used, compared with the regular Selenium version.
+
+The tests are located in the directories:
+
+    doc/tutorial/test/selenium_poetry
+    doc/tutorial/test/selenium_regular
+
+### Testing the homepage
+
+Let's begin with the tests for the homepage. Take a look at the file:
+
+    doc/tutorial/test/selenium_poetry/index.rsel
+
 
 
 

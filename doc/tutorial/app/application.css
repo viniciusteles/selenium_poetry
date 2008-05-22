@@ -8,7 +8,7 @@ html * {
 	min-height:				13em;
 	height:					auto !important;
 	height:					13em;
-	border:					1px solid black;
+	border:					1px dashed black;
 	margin-top:				.75em;
 	margin-left:			34.35em;
 	position:				relative;

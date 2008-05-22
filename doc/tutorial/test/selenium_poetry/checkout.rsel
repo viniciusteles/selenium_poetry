@@ -11,8 +11,8 @@ should_have                 "form",
                             "input for phone",
                             "submit"
                           
-type_on                     "input for name" => "Steve Jobs",
-                            "input for email" => "rdf@apple.com",
+type_on                     "input for name"    => "Steve Jobs",
+                            "input for email"   => "rdf@apple.com",
                             "input for address" => "1 Infinite Loop, Cupertino, CA",
                             "input for phone"   => "1-800-MY-APPLE"
                           

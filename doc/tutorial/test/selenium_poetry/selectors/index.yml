@@ -1,16 +1,16 @@
 page heading:
     //h1
     
-rio de janeiro:
+postcard of rio de janeiro:
     //ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]
     
-recife:
+postcard of recife:
     //ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]
     
-norway:
+postcard of norway:
     //ul/li/img[@src="images/norway.jpg" and @alt="Norway" and @title="Norway"]
     
-littleboy:
+postcard of littleboy:
     //ul/li/img[@src="images/littleboy.jpg" and @alt="Littleboy" and @title="Littleboy"]
     
 selection area:
