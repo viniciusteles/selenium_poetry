@@ -70,6 +70,8 @@ module SeleniumPoetry
   end
   
   # Is equivalent to Selenium's <tt>wait_for_element_present</tt>. 
+  #
+  # Take a look at should_have for further explanation. It's the same thing, but uses <tt>wait_for_element_present</tt> instead of <tt>assert_element_present</tt>.
   def should_wait_for(*selector_keys)
     run_protected do
       selector_keys.each { |key| wait_for_element_present @selectors[key] } 
@@ -77,6 +79,8 @@ module SeleniumPoetry
   end
   
   # Is equivalent to Selenium's <tt>wait_for_element_not_present</tt>. 
+  # 
+  # Take a look at should_not_have for further explanation. It's the same thing, but uses <tt>wait_for_element_not_present</tt> instead of <tt>assert_element_present</tt>.
   def should_wait_for_absence_of(*selector_keys)
     run_protected do
       selector_keys.each { |key| wait_for_element_not_present @selectors[key] } 
