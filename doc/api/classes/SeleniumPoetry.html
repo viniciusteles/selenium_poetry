@@ -160,6 +160,26 @@ href="http://www.ruby-doc.org/core/classes/YAML.html">YAML</a> files.
           <p>
 Is equivalent to Selenium&#8216;s <tt>click</tt>.
 </p>
+<p>
+Suppose you have the selector file test/selectors/index.yml with this
+content:
+</p>
+<pre>
+  buy button:
+      //a[@href=&quot;checkout.html&quot; and text()=&quot;Buy&quot;]
+</pre>
+<p>
+Using <a href="SeleniumPoetry.html#M000006">click_on</a>:
+</p>
+<pre>
+  click_on &quot;buy button&quot;
+</pre>
+<p>
+This is equivalent to the regular Selenium command:
+</p>
+<pre>
+  click '//a[@href=&quot;checkout.html&quot; and text()=&quot;Buy&quot;]'
+</pre>
         </div>
       </div>
 
@@ -176,6 +196,11 @@ Is equivalent to Selenium&#8216;s <tt>click</tt>.
         <div class="method-description">
           <p>
 Is equivalent to Selenium&#8216;s <tt>click_and_wait</tt>.
+</p>
+<p>
+This is similar to <a href="SeleniumPoetry.html#M000006">click_on</a>,
+except that instead of using Selenium&#8216;s <tt>click</tt>, it uses
+<tt>click_and_wait</tt>.
 </p>
         </div>
       </div>

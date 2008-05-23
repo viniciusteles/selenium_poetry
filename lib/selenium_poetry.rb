@@ -88,6 +88,19 @@ module SeleniumPoetry
   end
   
   # Is equivalent to Selenium's <tt>click</tt>. 
+  #
+  # Suppose you have the selector file test/selectors/index.yml with this content:
+  #
+  #   buy button:
+  #       //a[@href="checkout.html" and text()="Buy"]
+  #
+  # Using click_on: 
+  #
+  #   click_on "buy button"
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   click '//a[@href="checkout.html" and text()="Buy"]'
   def click_on(*selector_keys)
     run_protected do
       selector_keys.each { |key| click @selectors[key] }
@@ -95,6 +108,8 @@ module SeleniumPoetry
   end
 
   # Is equivalent to Selenium's <tt>click_and_wait</tt>.  
+  #
+  # This is similar to click_on, except that instead of using Selenium's <tt>click</tt>, it uses <tt>click_and_wait</tt>.
   def click_on_and_wait(*selector_keys)
     run_protected do
       selector_keys.each { |key| click_and_wait @selectors[key] }
