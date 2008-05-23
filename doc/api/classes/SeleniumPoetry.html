@@ -273,6 +273,45 @@ beginning of your tests.
         </div>
       
         <div class="method-description">
+          <p>
+Is equivalent to Selenium&#8216;s <tt>assert_element_present</tt>.
+</p>
+<p>
+Suppose you have the selector file test/selectors/index.yml with this
+content:
+</p>
+<pre>
+  postcard of rio de janeiro:
+      //ul/li/img[@src=&quot;images/riodejaneiro.jpg&quot; and @alt=&quot;Rio de Janeiro&quot; and @title=&quot;Rio de Janeiro&quot;]
+  postcard of recife:
+      //ul/li/img[@src=&quot;images/recife.jpg&quot; and @alt=&quot;Recife&quot; and @title=&quot;Recife&quot;]
+</pre>
+<p>
+Using <a href="SeleniumPoetry.html#M000002">should_have</a>:
+</p>
+<pre>
+  should_have &quot;postcard of rio de janeiro&quot;
+</pre>
+<p>
+This is equivalent to the regular Selenium command:
+</p>
+<pre>
+  assert_element_present '//ul/li/img[@src=&quot;images/riodejaneiro.jpg&quot; and @alt=&quot;Rio de Janeiro&quot; and @title=&quot;Rio de Janeiro&quot;]'
+</pre>
+<p>
+If you need to test more than one selector, use this syntax:
+</p>
+<pre>
+  should_have &quot;postcard of rio de janeiro&quot;,
+              &quot;postcard of recife&quot;
+</pre>
+<p>
+This will produce the equivalent Selenium commands:
+</p>
+<pre>
+  assert_element_present '//ul/li/img[@src=&quot;images/riodejaneiro.jpg&quot; and @alt=&quot;Rio de Janeiro&quot; and @title=&quot;Rio de Janeiro&quot;]'
+  assert_element_present '//ul/li/img[@src=&quot;images/recife.jpg&quot; and @alt=&quot;Recife&quot; and @title=&quot;Recife&quot;]'
+</pre>
         </div>
       </div>
 

@@ -28,6 +28,32 @@ module SeleniumPoetry
     filenames.each { |filename| @selectors.merge!(YAML::load(File.read(SELECTORS_DIR + "/#{filename.to_s}.yml"))) }
   end
   
+  # Is equivalent to Selenium's <tt>assert_element_present</tt>. 
+  #
+  # Suppose you have the selector file test/selectors/index.yml with this content:
+  #
+  #   postcard of rio de janeiro:
+  #       //ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]
+  #   postcard of recife:
+  #       //ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]
+  #
+  # Using should_have: 
+  #
+  #   should_have "postcard of rio de janeiro"
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   assert_element_present '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]'
+  #
+  # If you need to test more than one selector, use this syntax:
+  #
+  #   should_have "postcard of rio de janeiro", 
+  #               "postcard of recife"
+  #
+  # This will produce the equivalent Selenium commands:
+  #
+  #   assert_element_present '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]'
+  #   assert_element_present '//ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]'
   def should_have(*selector_keys)
     run_protected do
       selector_keys.each { |key| assert_element_present @selectors[key] } 
