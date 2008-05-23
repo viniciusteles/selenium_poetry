@@ -2,6 +2,8 @@
 
 ## Introduction
 
+To understand the what Selenium Poetry is and what you can do with it, keep reading this tutorial. However, if you just want to take a look at the API, you'll find it at [doc/api/index.html][api].
+
 In this tutorial we will assume the development of a tiny application: **The Postcard Galley**. 
 
 There's this artist who designs very fancy postcards. He sells them using his web site. To see it load the following file in your web browser:
@@ -220,3 +222,4 @@ LittleBoy - Marcus Correa
 
 [selenium_image]: selenium.gif "Postcard Gallery"
 [app]: app/index.html
+[api]: ../api/index.html
