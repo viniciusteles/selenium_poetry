@@ -116,35 +116,104 @@ module SeleniumPoetry
     end
   end
   
-  # Is equivalent to Selenium's <tt>assert_eval</tt>.  
+  # Is equivalent to Selenium's <tt>assert_eval</tt>.
+  #
+  # Suppose you have the selector file test/selectors/index.yml with this content:
+  #
+  #  number of postcards:    
+  #     this.page().findElement('postcards').select('img').length;
+  #  number of postcards selected:    
+  #     this.page().findElement('selection').select('img').length;
+  #
+  # Using should_equal: 
+  #
+  #   should_equal          "number of postcards" => 4
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   assert_eval             "this.page().findElement('postcards').select('img').length;", 4
+  #
+  # If you need to test more than one selector, use this syntax:
+  #
+  #   should_equal          "number of postcards" => 4, 
+  #                         "number of postcards selected" => 1
+  #
+  # This will produce the equivalent Selenium commands:
+  #
+  #   assert_eval             "this.page().findElement('postcards').select('img').length;", 4
+  #   assert_eval             "this.page().findElement('selection').select('img').length;"
   def should_equal(selector_keys_and_expected_values)
     run_protected do
       selector_keys_and_expected_values.each { |key, expected_value| assert_eval @selectors[key], expected_value }
     end
   end
 
-  # Is equivalent to Selenium's <tt>wait_for_eval</tt>.  
+  # Is equivalent to Selenium's <tt>wait_for_eval</tt>.
+  #
+  # This is similar to should_equal, except that instead of using Selenium's <tt>assert_eval</tt>, it uses <tt>wait_for_eval</tt>.
   def should_wait_for_equal(script_expected)
     run_protected do
       script_expected.each { |script, expected| wait_for_eval @selectors[script], expected }
     end
   end
   
-  # Is equivalent to Selenium's <tt>assert_text</tt>.  
+  # Is equivalent to Selenium's <tt>assert_text</tt>.
+  #
+  # Suppose you have the selector file test/selectors/index.yml with this content:
+  #
+  # page heading:
+  #     //h1
+  #
+  # Using should_have: 
+  #
+  #   should_have_text  "page heading", "Postcard Gallery"
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   assert_text            "//h1", "Postcard Gallery"
+  #
   def should_have_text(key, text)
     run_protected do
       assert_text @selectors[key], text
     end
   end
 
-  # Is equivalent to Selenium's <tt>assert_eval somethind, true</tt>.  
+  # Is equivalent to Selenium's <tt>assert_eval somethind, true</tt>.
+  #
+  # Suppose you have the selector file test/selectors/index.yml with this content:
+  #
+  #   empty selection area:
+  #      this.page().findElement('selection').select('img').length == 0;
+  #
+  #   less postcards after drag:
+  #      this.page().findElement('selection').select('img').length < numberOfPostarcdsAvaliable;
+  #
+  # Using should_be: 
+  #
+  #   should_be             "empty selection area"  
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   assert_eval             "this.page().findElement('selection').select('img').length == 0;", true 
+  #
+  # If you need to test more than one selector, use this syntax:
+  #
+  #   should_be             "empty selection area",
+  #                         "less postcards after drag"
+  #
+  # This will produce the equivalent Selenium commands:
+  #
+  #   assert_eval             "this.page().findElement('selection').select('img').length == 0;", true                 
+  #   assert_eval             "this.page().findElement('selection').select('img').length < numberOfPostarcdsAvaliable;", true
   def should_be(*selector_keys)
     run_protected do
       selector_keys.each { |key| assert_eval @selectors[key], true }
     end
   end
 
-  # Is equivalent to Selenium's <tt>assert_eval somethind, false</tt>.  
+  # Is equivalent to Selenium's <tt>assert_eval somethind, false</tt>.
+  #
+  # This is similar to should_be, except that instead of using true, it uses false.
   def should_not_be(*selector_keys)
     run_protected do
       selector_keys.each { |key| assert_eval @selectors[key], false }
@@ -152,6 +221,20 @@ module SeleniumPoetry
   end
   
   # Is equivalent to Selenium's <tt>store_eval</tt>.  
+  #
+  # Suppose you have the selector file test/selectors/index.yml with this content:
+  #
+  #   number of postcards:    
+  #      this.page().findElement('postcards').select('img').length;
+  #
+  # Using should_store: 
+  #
+  #   should_store          "number of postcards" => "numberOfPostarcdsAvaliable"
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   store_eval            "this.page().findElement('postcards').select('img').length;", "numberOfPostarcdsAvaliable"
+  #
   def should_store(script_variable)
     run_protected do 
       script_variable.each { |script, variable| store_eval @selectors[script], variable }
@@ -159,13 +242,49 @@ module SeleniumPoetry
   end
   
   # Is equivalent to Selenium's <tt>type</tt>.  
+  #
+  # Suppose you have the selector file test/selectors/checkout.yml with this content:
+  #
+  # input for name:
+  #     //form/fieldset/input[@name="name" and @type="text"]
+  # 
+  # input for email:
+  #     //form/fieldset/input[@name="email" and @type="text"]
+  #
+  # Using type_on: 
+  #
+  #   type_on                     "input for name"    => "Steve Jobs",
+  #                               "input for email"   => "rdf@apple.com",
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   type                         '//form/fieldset/input[@name="name" and @type="text"]',    'Steve Jobs'
+  #   type                         '//form/fieldset/input[@name="email" and @type="text"]',   'rdf@apple.com'
+  #
   def type_on(selector_keys_and_expected_values)
     run_protected do
       selector_keys_and_expected_values.each { |key, expected_value| type @selectors[key], expected_value }
     end
   end
   
-  # Is equivalent to Selenium's <tt>drag_and_drop_to_object</tt>.  
+  # Is equivalent to Selenium's <tt>drag_and_drop_to_object</tt>.
+  #
+  # Suppose you have the selector file test/selectors/index.yml with this content:
+  #
+  # postcard of rio de janeiro:
+  #    //ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]
+  # 
+  #  selection area:
+  #   //div[@id="selection"]
+  #
+  # Using should_drag_and_drop: 
+  #
+  #   should_drag_and_drop  "postcard of rio de janeiro", "selection area"
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   drag_and_drop_to_object '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]', '//div[@id="selection"]'
+  #  
   def should_drag_and_drop(key_of_origin, key_of_target)
     run_protected do
       drag_and_drop_to_object @selectors[key_of_origin], @selectors[key_of_target]
