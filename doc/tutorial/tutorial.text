@@ -10,7 +10,7 @@ There's this artist who designs very fancy postcards. He sells them using his we
 
 Or look the image and code below:
 
-![Index](selenium.gif)
+[![Postcard Gallery][selenium_image]][app]
 
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
 	  "http://www.w3.org/TR/html4/strict.dtd">
@@ -217,3 +217,6 @@ Rio de Janeiro - Daniël Silveira
 Recife - Antonio Serra  
 LittleBoy - Marcus Correa
   
+
+[selenium_image]: selenium.gif "Postcard Gallery"
+[app]: app/index.html
