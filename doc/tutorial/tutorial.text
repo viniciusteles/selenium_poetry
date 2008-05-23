@@ -4,9 +4,43 @@
 
 In this tutorial we will assume the development of a tiny application: **The Postcard Galley**. 
 
-There's this artist who designs very fancy postcards. He sells them using his web site. To see it load the following file in your web browser: 
+There's this artist who designs very fancy postcards. He sells them using his web site. To see it load the following file in your web browser:
 
-    doc/tutorial/app/index.html 
+	doc/tutorial/app/index.html
+
+Or look the image and code below:
+
+![Index](index.gif)
+
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	  "http://www.w3.org/TR/html4/strict.dtd">
+	<html>
+	  <head>
+	    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	    <link rel="stylesheet" href="application.css" type="text/css" media="screen" charset="utf-8">
+	    <title>Postcard Gallery</title>
+	  </head>
+
+	  <body>
+	    <h1>Postcard Gallery</h1>
+
+	    <p>Drag the postcards you like to the area on the right. After that, click on Buy.</p>
+
+	    <div id="postcards">
+	      <ul>
+	        <li><img src="images/norway.jpg" alt="Norway" title="Norway"></li>
+	        <li><img src="images/littleboy.jpg" alt="Littleboy" title="Littleboy"></li>
+	        <li><img src="images/riodejaneiro.jpg" alt="Rio de Janeiro" title="Rio de Janeiro"></li>
+	        <li><img src="images/recife.jpg" alt="Recife" title="Recife"></li>
+	      </ul>
+	    </div>
+
+	    <div id="selection"></div>
+
+	    <a href="checkout.html">Buy</a>
+	  </body>
+	</html>
+	
 
 The application has only three pages. The postcards are located in the very homepage. A visitor interested in buying a few of them can drag them to the selection area on the right. Clicking on 'Buy' the visitor is presented with a form where he should provide contact info. Finally, after submitting the form, the visitor will see a thank-you-page.
 
@@ -25,15 +59,79 @@ The tests are located in the directories:
 
 Let's begin with the tests for the homepage. Look at the file:
 
-    doc/tutorial/test/selenium_poetry/index.rsel
+	doc/tutorial/test/selenium_poetry/index.rsel
+	
+Or look the code below:
+
+	load_selectors        :index
+
+	should_have_text      "page heading", "Postcard Gallery"
+
+	should_have           "postcard of rio de janeiro",
+	                      "postcard of recife",
+	                      "postcard of norway",
+	                      "postcard of littleboy",
+	                      "selection area",
+	                      "postcards area",
+	                      "buy button"
+
+	should_equal          "number of postcards" => 4
+
+	should_be             "empty selection area"  
+
+	should_drag_and_drop  "postcard of rio de janeiro", "selection area"
+
+	should_wait_for_equal "number of postcards" => 3,
+	                      "number of postcards selected" => 1
+
+	should_not_be         "empty selection area"
+
+	should_store          "number of postcards" => "numberOfPostarcdsAvaliable"
+
+	should_drag_and_drop  "postcard of recife", "selection area"
+
+	should_be             "less postcards after drag"
+
+	click_on_and_wait     "buy button"
+	
 
 Take a moment and try to read it all. As you go, try to figure out what the purpose of the test is. 
 
-Are you done? Then, let's move on. Open the file:
+Are you done? Then, let's move on. Open the file: 
+	
+	doc/tutorial/test/selenium_regular/index.rsel
 
-    doc/tutorial/test/selenium_regular/index.rsel
-    
-This file tests the very same things as the previous one. But, boy, what a difference! Isn't that much more confusing and polluted?
+Or look the code below:
+
+	assert_text            "//h1", "Postcard Gallery"
+
+	assert_element_present '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]'
+	assert_element_present '//ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]'
+	assert_element_present '//ul/li/img[@src="images/norway.jpg" and @alt="Norway" and @title="Norway"]'
+	assert_element_present '//ul/li/img[@src="images/littleboy.jpg" and @alt="Littleboy" and @title="Littleboy"]'
+	assert_element_present '//div[@id="selection"]'
+	assert_element_present '//div[@id="postcards"]'
+	assert_element_present 'buy button'
+
+	assert_eval             "this.page().findElement('postcards').select('img').length;", 4
+	assert_eval             "this.page().findElement('selection').select('img').length == 0;", true                 
+
+	drag_and_drop_to_object '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]', '//div[@id="selection"]'
+
+	wait_for_eval           'this.page().findElement('postcards').select('img').length;', 3
+	wait_for_eval           'this.page().findElement('selection').select('img').length;', 1 
+
+	assert_eval             "this.page().findElement('selection').select('img').length == 0;", false
+
+	store_eval              "this.page().findElement('postcards').select('img').length;", "numberOfPostarcdsAvaliable"
+
+	drag_and_drop_to_object '//ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]', '//div[@id="selection"]'
+
+	assertEval              "this.page().findElement('selection').select('img').length < numberOfPostarcdsAvaliable;", true
+
+	click_and_wait          '//a[@href="checkout.html" and text()="Buy"]'
+
+This tests the very same things as the previous one. But, boy, what a difference! Isn't that much more confusing and polluted?
 
 The source of the problem is the use of XPath selectors in the same file where we place the test actions. To understand that, let's forget about Selenium mechanics for a moment. Say we're just writing a test script on a piece of paper. We'd probably write things like these:
 
@@ -47,6 +145,44 @@ This is straightforward and easy to communicate to anyone else, except the compu
 We solved this problem separating concerns. We decided to place test purposes in one place and selectors in another. Take a look at the file:
 
     doc/tutorial/test/selenium_poetry/selectors/index.yml
+
+Or look the code below:
+
+	page heading:
+	    //h1
+
+	postcard of rio de janeiro:
+	    //ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]
+
+	postcard of recife:
+	    //ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]
+
+	postcard of norway:
+	    //ul/li/img[@src="images/norway.jpg" and @alt="Norway" and @title="Norway"]
+
+	postcard of littleboy:
+	    //ul/li/img[@src="images/littleboy.jpg" and @alt="Littleboy" and @title="Littleboy"]
+
+	selection area:
+	    //div[@id="selection"]
+
+	postcards area:
+	    //div[@id="postcards"]
+
+	buy button:
+	    //a[@href="checkout.html" and text()="Buy"]
+
+	number of postcards:    
+	    this.page().findElement('postcards').select('img').length;
+
+	number of postcards selected:    
+	    this.page().findElement('selection').select('img').length;
+
+	empty selection area:
+	    this.page().findElement('selection').select('img').length == 0;
+
+	less postcards after drag:
+	    this.page().findElement('selection').select('img').length < numberOfPostarcdsAvaliable;
     
 This file contains only selectors. Actually that's not completely true. There are selectors and keys. It's like a Ruby Hash. There's a *key* and *value*. In this case, the *key* is a phrase that describes the selector, while the *value* is the selector itself. Let's see an example. In the selector's file, you might find something like this:
 

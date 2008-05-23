@@ -1,0 +1,237 @@
+
+<html>
+  <head><title>/Users/tapajos/workspace/selenium_poetry/doc/tutorial/tutorial.text</title></head>
+  <body>
+<h1>Tutorial</h1>
+
+<h2>Introduction</h2>
+
+<p>In this tutorial we will assume the development of a tiny application: <strong>The Postcard Galley</strong>. </p>
+
+<p>There's this artist who designs very fancy postcards. He sells them using his web site. To see it load the following file in your web browser:</p>
+
+<pre><code>doc/tutorial/app/index.html
+</code></pre>
+
+<p>Or look the image and code below:</p>
+
+<p><img src="index.gif" alt="Index"/></p>
+
+<pre><code>&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+  "http://www.w3.org/TR/html4/strict.dtd"&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta http-equiv="Content-type" content="text/html; charset=utf-8"&gt;
+    &lt;link rel="stylesheet" href="application.css" type="text/css" media="screen" charset="utf-8"&gt;
+    &lt;title&gt;Postcard Gallery&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    &lt;h1&gt;Postcard Gallery&lt;/h1&gt;
+
+    &lt;p&gt;Drag the postcards you like to the area on the right. After that, click on Buy.&lt;/p&gt;
+
+    &lt;div id="postcards"&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;img src="images/norway.jpg" alt="Norway" title="Norway"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;img src="images/littleboy.jpg" alt="Littleboy" title="Littleboy"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;img src="images/riodejaneiro.jpg" alt="Rio de Janeiro" title="Rio de Janeiro"&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;img src="images/recife.jpg" alt="Recife" title="Recife"&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+
+    &lt;div id="selection"&gt;&lt;/div&gt;
+
+    &lt;a href="checkout.html"&gt;Buy&lt;/a&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>The application has only three pages. The postcards are located in the very homepage. A visitor interested in buying a few of them can drag them to the selection area on the right. Clicking on 'Buy' the visitor is presented with a form where he should provide contact info. Finally, after submitting the form, the visitor will see a thank-you-page.</p>
+
+<p>It isn't a completely automated sales process. But, it's enough for the purposes of this tutorial. Oh, it's not completely functional either, but you'll get the picture.</p>
+
+<h2>Tests</h2>
+
+<p>There are two sets of tests for this application. One of them uses Selenium Poetry while the other uses just regular Selenium commands. Both sets test the same aspects of the application, but you'll see that there's a dramatic improvement in test readability when Selenium Poetry is used, compared with the regular Selenium version.</p>
+
+<p>The tests are located in the directories:</p>
+
+<pre><code>doc/tutorial/test/selenium_poetry
+doc/tutorial/test/selenium_regular
+</code></pre>
+
+<h3>Testing the homepage</h3>
+
+<p>Let's begin with the tests for the homepage. Look at the file:</p>
+
+<pre><code>doc/tutorial/test/selenium_poetry/index.rsel
+</code></pre>
+
+<p>Or look the code below:</p>
+
+<pre><code>load_selectors        :index
+
+should_have_text      "page heading", "Postcard Gallery"
+
+should_have           "postcard of rio de janeiro",
+                      "postcard of recife",
+                      "postcard of norway",
+                      "postcard of littleboy",
+                      "selection area",
+                      "postcards area",
+                      "buy button"
+
+should_equal          "number of postcards" =&gt; 4
+
+should_be             "empty selection area"  
+
+should_drag_and_drop  "postcard of rio de janeiro", "selection area"
+
+should_wait_for_equal "number of postcards" =&gt; 3,
+                      "number of postcards selected" =&gt; 1
+
+should_not_be         "empty selection area"
+
+should_store          "number of postcards" =&gt; "numberOfPostarcdsAvaliable"
+
+should_drag_and_drop  "postcard of recife", "selection area"
+
+should_be             "less postcards after drag"
+
+click_on_and_wait     "buy button"
+</code></pre>
+
+<p>Take a moment and try to read it all. As you go, try to figure out what the purpose of the test is. </p>
+
+<p>Are you done? Then, let's move on. Open the file: </p>
+
+<pre><code>doc/tutorial/test/selenium_regular/index.rsel
+</code></pre>
+
+<p>Or look the code below:</p>
+
+<pre><code>assert_text            "//h1", "Postcard Gallery"
+
+assert_element_present '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]'
+assert_element_present '//ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]'
+assert_element_present '//ul/li/img[@src="images/norway.jpg" and @alt="Norway" and @title="Norway"]'
+assert_element_present '//ul/li/img[@src="images/littleboy.jpg" and @alt="Littleboy" and @title="Littleboy"]'
+assert_element_present '//div[@id="selection"]'
+assert_element_present '//div[@id="postcards"]'
+assert_element_present 'buy button'
+
+assert_eval             "this.page().findElement('postcards').select('img').length;", 4
+assert_eval             "this.page().findElement('selection').select('img').length == 0;", true                 
+
+drag_and_drop_to_object '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]', '//div[@id="selection"]'
+
+wait_for_eval           'this.page().findElement('postcards').select('img').length;', 3
+wait_for_eval           'this.page().findElement('selection').select('img').length;', 1 
+
+assert_eval             "this.page().findElement('selection').select('img').length == 0;", false
+
+store_eval              "this.page().findElement('postcards').select('img').length;", "numberOfPostarcdsAvaliable"
+
+drag_and_drop_to_object '//ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]', '//div[@id="selection"]'
+
+assertEval              "this.page().findElement('selection').select('img').length &lt; numberOfPostarcdsAvaliable;", true
+
+click_and_wait          '//a[@href="checkout.html" and text()="Buy"]'
+</code></pre>
+
+<p>This tests the very same things as the previous one. But, boy, what a difference! Isn't that much more confusing and polluted?</p>
+
+<p>The source of the problem is the use of XPath selectors in the same file where we place the test actions. To understand that, let's forget about Selenium mechanics for a moment. Say we're just writing a test script on a piece of paper. We'd probably write things like these:</p>
+
+<ul>
+<li>Check if there's a heading with the content: Postcard Gallery</li>
+<li>Check if there's a postcard of Rio de Janeiro</li>
+<li>Check if there's a postcard of Recife</li>
+<li>Check if there are four postcards</li>
+</ul>
+
+<p>This is straightforward and easy to communicate to anyone else, except the computer. It demands more precision from ourselves. It wants to know what part of the HTML are we referring to. That's why we must use XPath selectors, or any kind of selector that Selenium would allow.</p>
+
+<p>We solved this problem separating concerns. We decided to place test purposes in one place and selectors in another. Take a look at the file:</p>
+
+<pre><code>doc/tutorial/test/selenium_poetry/selectors/index.yml
+</code></pre>
+
+<p>Or look the code below:</p>
+
+<pre><code>page heading:
+    //h1
+
+postcard of rio de janeiro:
+    //ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]
+
+postcard of recife:
+    //ul/li/img[@src="images/recife.jpg" and @alt="Recife" and @title="Recife"]
+
+postcard of norway:
+    //ul/li/img[@src="images/norway.jpg" and @alt="Norway" and @title="Norway"]
+
+postcard of littleboy:
+    //ul/li/img[@src="images/littleboy.jpg" and @alt="Littleboy" and @title="Littleboy"]
+
+selection area:
+    //div[@id="selection"]
+
+postcards area:
+    //div[@id="postcards"]
+
+buy button:
+    //a[@href="checkout.html" and text()="Buy"]
+
+number of postcards:    
+    this.page().findElement('postcards').select('img').length;
+
+number of postcards selected:    
+    this.page().findElement('selection').select('img').length;
+
+empty selection area:
+    this.page().findElement('selection').select('img').length == 0;
+
+less postcards after drag:
+    this.page().findElement('selection').select('img').length &lt; numberOfPostarcdsAvaliable;
+</code></pre>
+
+<p>This file contains only selectors. Actually that's not completely true. There are selectors and keys. It's like a Ruby Hash. There's a <em>key</em> and <em>value</em>. In this case, the <em>key</em> is a phrase that describes the selector, while the <em>value</em> is the selector itself. Let's see an example. In the selector's file, you might find something like this:</p>
+
+<pre><code>postcard of rio de janeiro:
+    //ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]
+</code></pre>
+
+<p>When Selenium Poetry loads this file, it creates a Ruby Hash like the one below:</p>
+
+<pre><code>{ 'postcard of rio de janeiro' =&gt; '//ul/li/img[@src="images/riodejaneiro.jpg" and @alt="Rio de Janeiro" and @title="Rio de Janeiro"]' }
+</code></pre>
+
+<p>From then on, you don't need to think about the HTML selector anymore. You just use the keys ('postcard of rio de janeiro', in the last case). </p>
+
+<p>This separation of concerns not only helps you to write more readable tests, but also creates opportunities for reuse. You can use the same key in several test cases. If the corresponding selector changes, you just have to change in one place, so it's also much DRYer.</p>
+
+<p>In order to use the keys in your Selenium tests, all you have to do is to load them in the beginning of the test. That's how you do it:</p>
+
+<pre><code>load_selectors        :index
+</code></pre>
+
+<p>This will load the keys in the file <strong>index.yml</strong>, which must be placed in the directory <strong>test/selectors</strong> of your Rails application. If you need to load keys from several selector files, you just do like this:</p>
+
+<pre><code>load_selectors        :checkout, :finish
+</code></pre>
+
+<p>The keys placed in the files <strong>checkout.yml</strong> and <strong>finish.yml</strong> will be loaded. You can spread your keys in as many files as you want.</p>
+
+<hr/>
+
+<p>Authors: Vinícius Teles and Marcos Tapajós</p>
+
+<p>Pictures from Flickr (Creative Commons):<br/>
+Norway - Ken Douglas<br/>
+Rio de Janeiro - Daniël Silveira<br/>
+Recife - Antonio Serra<br/>
+LittleBoy - Marcus Correa</p>
+  </body>
+</html>
