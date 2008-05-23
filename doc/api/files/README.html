@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Fri May 23 11:50:06 -0300 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+SeleniumPoetry
+</p>
+<h6>========</h6>
+<p>
+Selenium Poetry is a DSL created to separate the test intention from the
+HTML selectors. HTML selector are placed in separate YAML files, while the
+test uses identifiers (phrases) to refer to the selectors in the YAML
+files.
+</p>
+<p>
+Dependencies
+</p>
+<h6>======</h6>
+<ul>
+<li>Selenium on Rails
+
+</li>
+<li>Mocha (to run plugin tests)
+
+</li>
+</ul>
+<p>
+Tutorial
+</p>
+<h6>==</h6>
+<p>
+Read the tutorial in doc/tutorial/tutorial.text
+</p>
+<p>
+Release Notes
+</p>
+<h6>=======</h6>
+<p>
+Selenium Plugin hasn&#8216;t been officially published yet. The plugin is
+working fine, but we&#8216;re still working on the documentation. A
+tutorial has just been published, but we plan to improve it. (22 May 2008)
+</p>
+<p>
+Copyright (c) 2008 Vinícius Manhães Teles and Marcos Tapajós, Improve
+It, released under the MIT license
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

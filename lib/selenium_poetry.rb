@@ -1,7 +1,28 @@
+# This module extends SeleniumOnRails::TestBuilder. It enables you to write more readable Selenium tests.
+#
+# To use the methods of Selenium Poetry in your tests, you'll first need to load selectors. Do that with the method load_selectors.
+#
+# Selector files must be place in your Rails application under the directory test/selectors. They should be YAML[http://www.ruby-doc.org/core/classes/YAML.html] files.
 module SeleniumPoetry
   
   SELECTORS_DIR = File.dirname(__FILE__) + "/../../../../test/selectors"
   
+  # Use it load the selectors you'll need to use in your Selenium test. Example:
+  # 
+  #  load_selectors :index
+  # 
+  # This will load selectors from the file test/selectors/index.yml. 
+  # If you have to load selectors from several files, you do like this:
+  #
+  #   load_selectors :index, :checkout, :finish
+  # 
+  # It will load selectors from the files:
+  # 
+  # * test/selectors/index.yml
+  # * test/selectors/checkout.yml
+  # * test/selectors/finish.yml
+  #
+  # Place load_selectors in the beginning of your tests.
   def load_selectors(*filenames)
     @selectors ||= {}
     filenames.each { |filename| @selectors.merge!(YAML::load(File.read(SELECTORS_DIR + "/#{filename.to_s}.yml"))) }

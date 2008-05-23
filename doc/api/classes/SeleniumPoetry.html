@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: SeleniumPoetry</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">SeleniumPoetry</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/lib/selenium_poetry_rb.html">
+                lib/selenium_poetry.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+This module extends SeleniumOnRails::TestBuilder. It enables you to write
+more readable Selenium tests.
+</p>
+<p>
+To use the methods of Selenium Poetry in your tests, you&#8216;ll first
+need to load selectors. Do that with the method <a
+href="SeleniumPoetry.html#M000001">load_selectors</a>.
+</p>
+<p>
+Selector files must be place in your Rails application under the directory
+test/selectors. They should be <a
+href="http://www.ruby-doc.org/core/classes/YAML.html">YAML</a> files.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000006">click_on</a>&nbsp;&nbsp;
+      <a href="#M000007">click_on_and_wait</a>&nbsp;&nbsp;
+      <a href="#M000001">load_selectors</a>&nbsp;&nbsp;
+      <a href="#M000011">should_be</a>&nbsp;&nbsp;
+      <a href="#M000015">should_drag_and_drop</a>&nbsp;&nbsp;
+      <a href="#M000008">should_equal</a>&nbsp;&nbsp;
+      <a href="#M000002">should_have</a>&nbsp;&nbsp;
+      <a href="#M000010">should_have_text</a>&nbsp;&nbsp;
+      <a href="#M000012">should_not_be</a>&nbsp;&nbsp;
+      <a href="#M000003">should_not_have</a>&nbsp;&nbsp;
+      <a href="#M000013">should_store</a>&nbsp;&nbsp;
+      <a href="#M000004">should_wait_for</a>&nbsp;&nbsp;
+      <a href="#M000005">should_wait_for_absence_of</a>&nbsp;&nbsp;
+      <a href="#M000009">should_wait_for_equal</a>&nbsp;&nbsp;
+      <a href="#M000014">type_on</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">SELECTORS_DIR</td>
+          <td>=</td>
+          <td class="context-item-value">File.dirname(__FILE__) + &quot;/../../../../test/selectors&quot;</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000006.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000006.html');return false;">
+          <span class="method-name">click_on</span><span class="method-args">(*selector_keys)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000007.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000007.html');return false;">
+          <span class="method-name">click_on_and_wait</span><span class="method-args">(*selector_keys)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000001" class="method-detail">
+        <a name="M000001"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000001.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000001.html');return false;">
+          <span class="method-name">load_selectors</span><span class="method-args">(*filenames)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Use it load the selectors you&#8216;ll need to use in your Selenium test.
+Example:
+</p>
+<pre>
+ load_selectors :index
+</pre>
+<p>
+This will load selectors from the file test/selectors/index.yml. If you
+have to load selectors from several files, you do like this:
+</p>
+<pre>
+  load_selectors :index, :checkout, :finish
+</pre>
+<p>
+It will load selectors from the files:
+</p>
+<ul>
+<li>test/selectors/index.yml
+
+</li>
+<li>test/selectors/checkout.yml
+
+</li>
+<li>test/selectors/finish.yml
+
+</li>
+</ul>
+<p>
+Place <a href="SeleniumPoetry.html#M000001">load_selectors</a> in the
+beginning of your tests.
+</p>
+        </div>
+      </div>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000011.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000011.html');return false;">
+          <span class="method-name">should_be</span><span class="method-args">(*selector_keys)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000015" class="method-detail">
+        <a name="M000015"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000015.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000015.html');return false;">
+          <span class="method-name">should_drag_and_drop</span><span class="method-args">(key_of_origin, key_of_target)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000008.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000008.html');return false;">
+          <span class="method-name">should_equal</span><span class="method-args">(selector_keys_and_expected_values)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000002.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000002.html');return false;">
+          <span class="method-name">should_have</span><span class="method-args">(*selector_keys)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000010.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000010.html');return false;">
+          <span class="method-name">should_have_text</span><span class="method-args">(key, text)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000012.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000012.html');return false;">
+          <span class="method-name">should_not_be</span><span class="method-args">(*selector_keys)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000003.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000003.html');return false;">
+          <span class="method-name">should_not_have</span><span class="method-args">(*selector_keys)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000013.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000013.html');return false;">
+          <span class="method-name">should_store</span><span class="method-args">(script_variable)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000004.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000004.html');return false;">
+          <span class="method-name">should_wait_for</span><span class="method-args">(*selector_keys)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000005.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000005.html');return false;">
+          <span class="method-name">should_wait_for_absence_of</span><span class="method-args">(*selector_keys)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000009.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000009.html');return false;">
+          <span class="method-name">should_wait_for_equal</span><span class="method-args">(script_expected)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+      <div id="method-M000014" class="method-detail">
+        <a name="M000014"></a>
+
+        <div class="method-heading">
+          <a href="SeleniumPoetry.src/M000014.html" target="Code" class="method-signature"
+            onclick="popupCode('SeleniumPoetry.src/M000014.html');return false;">
+          <span class="method-name">type_on</span><span class="method-args">(selector_keys_and_expected_values)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
