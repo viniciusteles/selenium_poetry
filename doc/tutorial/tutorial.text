@@ -211,7 +211,7 @@ The keys placed in the files **checkout.yml** and **finish.yml** will be loaded.
 
 
 ----
-Authors: Vinícius Teles and Marcos Tapajós
+Authors: [Vinícius Teles][vinicius] and [Marcos Tapajós][tapa]
 
 Pictures from Flickr (Creative Commons):  
 Norway - Ken Douglas  
@@ -223,3 +223,5 @@ LittleBoy - Marcus Correa
 [selenium_image]: selenium.gif "Postcard Gallery"
 [app]: app/index.html
 [api]: ../api/index.html
+[vinicius]: http://www.improveit.com.br/vinicius
+[tapa]: http://www.improveit.com.br/tapajos
