@@ -9,7 +9,8 @@ class SeleniumPoetryTest < Test::Unit::TestCase
                 "number of photos"        => "this.page().findElement('photos').select('a').length;",
                 "number of addresses"     => "this.page().findElement('address').length;",
                 "photos container empty"  => "this.page().findElement('photos').select('a').length == 0;", 
-                "photos container full"   => "this.page().findElement('photos').select('a').length >= 30;" }
+                "photos container full"   => "this.page().findElement('photos').select('a').length >= 30;",
+                "checkout form"           => "//form" }
 
   include SeleniumPoetry
 
@@ -46,7 +47,8 @@ class SeleniumPoetryTest < Test::Unit::TestCase
                                                            "number of photos"         => "this.page().findElement('photos').select('a').length;",
                                                            "number of addresses"     => "this.page().findElement('address').length;",
                                                            "photos container empty"  => "this.page().findElement('photos').select('a').length == 0;" , 
-                                                           "photos container full"   => "this.page().findElement('photos').select('a').length >= 30;" })
+                                                           "photos container full"   => "this.page().findElement('photos').select('a').length >= 30;", 
+                                                           "checkout form"           => "//form" })
     File.expects(:read).with(SELECTORS_DIR + "/contact_form.yml").returns(contact_file_mock)
     File.expects(:read).with(SELECTORS_DIR + "/homepage.yml").returns(homepage_file_mock)
     
@@ -316,6 +318,12 @@ class SeleniumPoetryTest < Test::Unit::TestCase
     assert_raise ArgumentError do
       should_drag_and_drop nil, nil
     end
+  end
+
+  # submit_on
+  def test_submit_on
+    expects(:submit).with("//form")
+    submit_on "checkout form"
   end
 
   private

@@ -291,6 +291,27 @@ module SeleniumPoetry
     end
   end
   
+  # Is equivalent to Selenium's <tt>submit</tt>.
+  #
+  # Suppose you have the selector file test/selectors/checkout.yml with this content:
+  #
+  # checkout form:
+  #     //form
+  # 
+  # Using submit_on: 
+  #
+  #   submit_on                   "checkout form"
+  #
+  # This is equivalent to the regular Selenium command:
+  #
+  #   submit                      '//form'
+  #
+  def submit_on(*selector_keys)
+    run_protected do
+      selector_keys.each { |key| submit @selectors[key] }
+    end
+  end
+  
   private
   
   def run_protected
